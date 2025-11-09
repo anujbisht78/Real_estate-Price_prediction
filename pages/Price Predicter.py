@@ -42,7 +42,7 @@ def load_data_and_model():
 
     # Download model if not found locally
     if not os.path.exists(MODEL_PATH):
-        st.info("📦 Downloading model from Google Drive... please wait ⏳")
+        # st.info("📦 Downloading model from Google Drive... please wait ⏳")
         try:
             gdown.download(DRIVE_URL, MODEL_PATH, quiet=False)
             st.success("✅ Model downloaded successfully!")
