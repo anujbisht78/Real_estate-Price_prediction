@@ -1,9 +1,9 @@
 numpy
-panda
+pandas
 plotly
-matplotli
-scikit-lear
+matplotlib
+scikit-learn
 seaborn
 streamlit
 wordcloud
-gdow
+gdown
