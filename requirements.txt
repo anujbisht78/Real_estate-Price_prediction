@@ -6,4 +6,4 @@ scikit-lear
 seaborn
 streamlit
 wordcloud
-gdow
+gdown
