@@ -2,6 +2,8 @@ import streamlit as st
 import pickle
 import pandas as pd
 import numpy as np
+import os
+import gdown
 
 
 # PAGE CONFIG
@@ -15,16 +17,41 @@ st.set_page_config(
 
 # LOAD DATA & MODEL
 
+# @st.cache_resource
+# def load_data_and_model():
+#     with open('df.pkl', 'rb') as file:
+#         df = pickle.load(file)
+
+#     with open('pipeline.pkl', 'rb') as file:
+#         pipeline = pickle.load(file)
+
+#     return df, pipeline
+
+# df, pipeline = load_data_and_model()
+
+# Google Drive file ID for your pipeline.pkl
+# Direct Google Drive link to your pipeline.pkl file
+DRIVE_URL = "https://drive.google.com/uc?id=13e0CbaQZhqGQtcF4c9BxYB5e1JmAcW_S"
+MODEL_PATH = "pipeline.pkl"
+
 @st.cache_resource
 def load_data_and_model():
+    # Load local DataFrame
     with open('df.pkl', 'rb') as file:
         df = pickle.load(file)
 
-    with open('pipeline.pkl', 'rb') as file:
+    # If model doesn't exist locally, download it from Google Drive
+    if not os.path.exists(MODEL_PATH):
+        st.info("Downloading model from Google Drive... please wait ⏳")
+        gdown.download(DRIVE_URL, MODEL_PATH, quiet=False)
+
+    # Load the trained pipeline
+    with open(MODEL_PATH, 'rb') as file:
         pipeline = pickle.load(file)
 
     return df, pipeline
 
+# Load data and model
 df, pipeline = load_data_and_model()
 
 
