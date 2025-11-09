@@ -31,7 +31,7 @@ st.set_page_config(
 
 # Google Drive file ID for your pipeline.pkl
 # Direct Google Drive link to your pipeline.pkl file
-DRIVE_URL = "https://drive.google.com/uc?id=13e0CbaQZhqGQtcF4c9BxYB5e1JmAcW_S"
+DRIVE_URL = "https://drive.google.com/uc?id=1pZ3Bue_ezfRnt_3DRTLvvi_9RBK40Qae"
 MODEL_PATH = "pipeline.pkl"
 
 @st.cache_resource
@@ -40,12 +40,17 @@ def load_data_and_model():
     with open('df.pkl', 'rb') as file:
         df = pickle.load(file)
 
-    # If model doesn't exist locally, download it from Google Drive
+    # Download model if not found locally
     if not os.path.exists(MODEL_PATH):
-        st.info("Downloading model from Google Drive... please wait ⏳")
-        gdown.download(DRIVE_URL, MODEL_PATH, quiet=False)
+        st.info("📦 Downloading model from Google Drive... please wait ⏳")
+        try:
+            gdown.download(DRIVE_URL, MODEL_PATH, quiet=False)
+            st.success("✅ Model downloaded successfully!")
+        except Exception as e:
+            st.error(f"❌ Failed to download model: {e}")
+            st.stop()
 
-    # Load the trained pipeline
+    # Load trained pipeline
     with open(MODEL_PATH, 'rb') as file:
         pipeline = pickle.load(file)
 
