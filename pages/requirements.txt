@@ -1,8 +1,9 @@
-numpy
-pandas
-plotly
-matplotlib
-scikit-learn
-seaborn
-streamlit
-wordcloud
+numpy==1.26.4
+pandas==1.5.0
+plotly==5.19.0
+matplotlib==3.7.2
+scikit-learn==1.7.1
+seaborn==0.12.2
+streamlit==1.30.0
+wordcloud==1.9.2
+gdown==5.2.0
